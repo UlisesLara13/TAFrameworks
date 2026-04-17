@@ -201,7 +201,7 @@ Logs are written to:
 
 # 👨‍💻 Author
 
-Student: Ulises Lara
-Program: EPAM Java Automation Specialization
-Project: Module 8 TA Frameworks: Layers, Runner, Business Objects
+- Student: Ulises Lara
+- Program: EPAM Java Automation Specialization
+- Project: Module 8 TA Frameworks: Layers, Runner, Business Objects
 
