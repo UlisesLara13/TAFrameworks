@@ -15,6 +15,7 @@ import service.TestDataReader;
  * and sees the order confirmation message.
  */
 public class CheckoutTest extends BaseTest {
+
     @Test
     public void completeCheckout() {
 
@@ -23,11 +24,11 @@ public class CheckoutTest extends BaseTest {
                 TestDataReader.getTestData("password")
         );
 
-        CheckoutData checkoutData = new CheckoutData(
-                TestDataReader.getTestData("firstName"),
-                TestDataReader.getTestData("lastName"),
-                TestDataReader.getTestData("zipCode")
-        );
+        CheckoutData checkoutData = new CheckoutData.Builder()
+                .setFirstName(TestDataReader.getTestData("firstName"))
+                .setLastName(TestDataReader.getTestData("lastName"))
+                .setZipCode(TestDataReader.getTestData("zipCode"))
+                .build();
 
         LoginPage loginPage = new LoginPage(driver).openPage();
         HomePage homePage = loginPage.login(user);
@@ -46,18 +47,12 @@ public class CheckoutTest extends BaseTest {
         String actual = homePage.getConfirmationMessage();
         String expected = "Thank you for your order!";
 
-        try {
-            log.info("Validating checkout");
+        log.info("Validating checkout");
 
-            Assert.assertEquals(actual, expected);
-
-            log.info("Checkout PASSED");
-
-        } catch (AssertionError e) {
-            log.error("Checkout FAILED");
-            log.error("Expected: {}", expected);
-            log.error("Actual: {}", actual);
-            throw e;
-        }
+        Assert.assertEquals(
+                actual,
+                expected,
+                "Checkout process failed"
+        );
     }
 }

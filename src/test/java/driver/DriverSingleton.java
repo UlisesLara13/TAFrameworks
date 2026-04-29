@@ -1,10 +1,10 @@
 package driver;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import service.TestDataReader;
+import driver.factory.ChromeDriverFactory;
+import driver.factory.EdgeDriverFactory;
+import driver.factory.WebDriverFactory;
 
 /**
  * Singleton class to manage WebDriver instances.
@@ -26,19 +26,19 @@ public class DriverSingleton {
         if (driver.get() == null) {
             String browser = TestDataReader.getTestData("browser");
 
+            WebDriverFactory factory;
+
             switch (browser.toLowerCase()) {
                 case "edge":
-                    WebDriverManager.edgedriver().setup();
-                    driver.set(new EdgeDriver());
+                    factory = new EdgeDriverFactory();
                     break;
-
                 case "chrome":
                 default:
-                    WebDriverManager.chromedriver().setup();
-                    driver.set(new ChromeDriver());
+                    factory = new ChromeDriverFactory();
                     break;
             }
 
+            driver.set(factory.createDriver());
             driver.get().manage().window().maximize();
         }
 

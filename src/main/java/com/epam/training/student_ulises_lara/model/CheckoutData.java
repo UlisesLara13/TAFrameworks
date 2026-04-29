@@ -12,16 +12,14 @@ public class CheckoutData {
     private final String zipCode;
 
     /**
-     * Constructs CheckoutData with the specified values.
+     * Private constructor to enforce object creation through Builder.
      *
-     * @param firstName the first name
-     * @param lastName the last name
-     * @param zipCode the postal code
+     * @param builder the Builder instance containing checkout data
      */
-    public CheckoutData(String firstName, String lastName, String zipCode) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.zipCode = zipCode;
+    private CheckoutData(Builder builder) {
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
+        this.zipCode = builder.zipCode;
     }
 
     /**
@@ -49,6 +47,59 @@ public class CheckoutData {
      */
     public String getZipCode() {
         return zipCode;
+    }
+
+    /**
+     * Builder class for CheckoutData.
+     * Provides a flexible way to construct CheckoutData objects.
+     */
+    public static class Builder {
+
+        private String firstName;
+        private String lastName;
+        private String zipCode;
+
+        /**
+         * Sets the first name.
+         *
+         * @param firstName the first name
+         * @return Builder instance
+         */
+        public Builder setFirstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        /**
+         * Sets the last name.
+         *
+         * @param lastName the last name
+         * @return Builder instance
+         */
+        public Builder setLastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        /**
+         * Sets the zip code.
+         *
+         * @param zipCode the postal code
+         * @return Builder instance
+         */
+        public Builder setZipCode(String zipCode) {
+            this.zipCode = zipCode;
+            return this;
+        }
+
+        /**
+         * Builds CheckoutData instance.
+         *
+         * @return CheckoutData object
+         */
+        public CheckoutData build() {
+            return new CheckoutData(this);
+        }
     }
 
     /**

@@ -1,6 +1,6 @@
 # Selenium WebDriver Test Automation Framework - SauceDemo
 
-This project implements a **test automation framework** for the SauceDemo web application using **Selenium WebDriver**, **Java**, and **TestNG**, applying the **Page Object Model (POM)** design pattern and automation best practices.
+This project implements a **test automation framework** for the SauceDemo web application using **Selenium WebDriver**, **Java**, and **TestNG**, applying **design patterns**, **Page Object Model (POM)**, and **SOLID principles**.
 
 The framework supports **multi-browser execution**, **logging**, **test data externalization**, and **test suites separation (Smoke & Regression)**.
 
@@ -11,6 +11,7 @@ The framework supports **multi-browser execution**, **logging**, **test data ext
 * Selenium WebDriver automation
 * TestNG test runner
 * Page Object Model (POM)
+* Design Patterns implementation
 * WebDriverManager for driver handling
 * Multi-browser support (Chrome & Edge)
 * Environment-based configuration (dev / qa)
@@ -18,6 +19,7 @@ The framework supports **multi-browser execution**, **logging**, **test data ext
 * Screenshot capture on test failure
 * Smoke & Regression test suites
 * Externalized test data (properties files)
+* Centralized error handling (clean test methods)
 
 ---
 
@@ -57,34 +59,42 @@ The framework supports **multi-browser execution**, **logging**, **test data ext
 ```
 src
 ├── main
-│   └── java
-│       └── com.epam.training.student_ulises_lara.model
-│           ├── User.java
-│           └── CheckoutData.java
+│ └── java
+│ └── com.epam.training.student_ulises_lara.model
+│ ├── User.java
+│ └── CheckoutData.java 
 │
 ├── test
-│   ├── java
-│   │   ├── base
-│   │   │   └── BaseTest.java
-│   │   ├── driver
-│   │   │   └── DriverSingleton.java
-│   │   ├── page
-│   │   │   ├── BasePage.java
-│   │   │   ├── LoginPage.java
-│   │   │   └── HomePage.java
-│   │   ├── service
-│   │   │   └── TestDataReader.java
-│   │   ├── tests
-│   │   │   ├── LoginTest.java
-│   │   │   ├── CartTest.java
-│   │   │   └── CheckoutTest.java
-│   │   └── utils
-│   │       └── ScreenshotUtils.java
+│ ├── java
+│ │ ├── base
+│ │ │ └── BaseTest.java
+│ │ ├── driver
+│ │ │ ├── DriverSingleton.java
+│ │ │ └── factory
+│ │ │ ├── WebDriverFactory.java
+│ │ │ ├── ChromeDriverFactory.java
+│ │ │ └── EdgeDriverFactory.java
+│ │ ├── decorator
+│ │ │ ├── ElementActions.java
+│ │ │ ├── BaseElementActions.java
+│ │ │ └── LoggingDecorator.java
+│ │ ├── page
+│ │ │ ├── BasePage.java
+│ │ │ ├── LoginPage.java
+│ │ │ └── HomePage.java
+│ │ ├── service
+│ │ │ └── TestDataReader.java
+│ │ ├── tests
+│ │ │ ├── LoginTest.java
+│ │ │ ├── CartTest.java
+│ │ │ └── CheckoutTest.java
+│ │ └── utils
+│ │ └── ScreenshotUtils.java
 │
-│   └── resources
-│       ├── dev.properties
-│       ├── qa.properties
-│       └── log4j2.xml
+│ └── resources
+│ ├── dev.properties
+│ ├── qa.properties
+│ └── log4j2.xml
 │
 ├── testng-smoke.xml
 ├── testng-regression.xml
@@ -196,6 +206,9 @@ Logs are written to:
 * Page Object Model (POM)
 * Singleton (Driver management)
 * ThreadLocal (parallel execution ready)
+* Factory Method (Implemented via WebDriverFactory interface to encapsulate browser creation logic and support extensibility without modifying existing code)
+* Decorator (Implemented via ElementActions interface to enhance element interactions with logging and highlighting without modifying base functionality)
+* Builder (Implemented in CheckoutData to provide a flexible and readable way to create test data objects)
 
 ---
 
@@ -203,5 +216,5 @@ Logs are written to:
 
 - Student: Ulises Lara
 - Program: EPAM Java Automation Specialization
-- Project: Module 8 TA Frameworks: Layers, Runner, Business Objects
+- Project: Module 8 TA Frameworks: Layers, Runner, Business Objects And Module 9 Design Patterns in TA Frameworks Implementation
 

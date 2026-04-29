@@ -31,18 +31,12 @@ public class CartTest extends BaseTest {
         int actual = homePage.getCartCount();
         int expected = 1;
 
-        try {
-            log.info("Validating cart count");
+        log.info("Validating cart count");
 
-            Assert.assertEquals(actual, expected);
-
-            log.info("Cart validation PASSED");
-
-        } catch (AssertionError e) {
-            log.error("Cart validation FAILED");
-            log.error("Expected: {}", expected);
-            log.error("Actual: {}", actual);
-            throw e;
-        }
+        Assert.assertEquals(
+                actual,
+                expected,
+                "Cart count validation failed"
+        );
     }
 }

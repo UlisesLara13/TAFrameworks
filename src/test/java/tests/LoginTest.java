@@ -30,21 +30,16 @@ public class LoginTest extends BaseTest {
         loginPage.clickLogin();
 
         HomePage homePage = new HomePage(driver);
+
         String actualTitle = homePage.getHeaderTitle();
         String expectedTitle = "Swag Labs";
 
-        try {
-            log.info("Validating header title");
+        log.info("Validating header title");
 
-            Assert.assertEquals(actualTitle, expectedTitle);
-
-            log.info("Validation PASSED");
-
-        } catch (AssertionError e) {
-            log.error("Validation FAILED");
-            log.error("Expected: {}", expectedTitle);
-            log.error("Actual: {}", actualTitle);
-            throw e;
-        }
+        Assert.assertEquals(
+                actualTitle,
+                expectedTitle,
+                "Login failed: Header title does not match"
+        );
     }
 }
